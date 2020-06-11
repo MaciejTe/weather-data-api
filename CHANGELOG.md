@@ -24,4 +24,4 @@
 -->
 0.0.0 (11.06.2020)
 ---------------------
-    - Initialised repository, added LICENSE, README and .gitignore
+    - Initialised repository, added README and .gitignore
