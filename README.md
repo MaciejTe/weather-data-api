@@ -104,6 +104,11 @@ Response:
  ]
  ```
 
+## Configuration
+Currently file with following environment variables need to be given as --env-file parameter during Docker container startup:
+1. API_PORT (default 8080) - port on which REST API listens for connections
+2. OPEN_WEATHER_API_KEY - application ID for OpenWeather REST API
+
 ## Docker
  There are two dockerfiles: 
  * **Dockerfile** - production, multi stage build image
