@@ -1,0 +1,42 @@
+{
+    "coord": {
+        "lon": 14.55,
+        "lat": 53.43
+    },
+    "weather": [
+        {
+            "id": 800,
+            "main": "Clear",
+            "description": "clear sky",
+            "icon": "01d"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 293.14,
+        "feels_like": 290.72,
+        "temp_min": 292.59,
+        "temp_max": 293.71,
+        "pressure": 1015,
+        "humidity": 49
+    },
+    "wind": {
+        "speed": 3.13,
+        "deg": 40
+    },
+    "clouds": {
+        "all": 3
+    },
+    "dt": 1592243597,
+    "sys": {
+        "type": 3,
+        "id": 19799,
+        "country": "PL",
+        "sunrise": 1592188361,
+        "sunset": 1592249526
+    },
+    "timezone": 7200,
+    "id": 3083829,
+    "name": "Szczecin",
+    "cod": 200
+}

@@ -22,6 +22,13 @@
 ##
 #######################################
 -->
+0.1.0 (15.06.2020)
+---------------------
+    - Implemented first version of REST API
+    - added some tests
+    - added Makefile
+    - added dev and prod Dockerfiles
+    
 0.0.0 (11.06.2020)
 ---------------------
     - Initialised repository, added README and .gitignore
