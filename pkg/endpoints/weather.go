@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/MaciejTe/weatherapp/pkg/helpers"
 	"github.com/MaciejTe/weatherapp/pkg/openweather"
+	"github.com/patrickmn/go-cache"
 	log "github.com/sirupsen/logrus"
 	"net/http"
 	"strings"
@@ -12,7 +13,7 @@ import (
 // GetWeatherByName collects weather information from OpenWeather API and aggregates them in JSON list.
 // Available query parameters:
 // 1. cities: list of city names, comma separated, i.e. New York,Warszawa,Berlin
-func (e *Server) GetWeatherByName(w http.ResponseWriter, r *http.Request) {
+func (s *Server) GetWeatherByName(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	switch r.Method {
 	case "GET":
@@ -26,33 +27,47 @@ func (e *Server) GetWeatherByName(w http.ResponseWriter, r *http.Request) {
 
 		var response []openweather.WeatherData
 		for _, cityName := range cities {
-			weatherResponse, err := e.weatherClient.SearchByName(cityName)
-			if err != nil {
-				log.Error(err)
-				helpers.RespondWithError(w, http.StatusInternalServerError, err.Error())
-				return
-			}
-			if weatherResponse.StatusCode() == http.StatusOK {
-				weatherData, err := openweather.NewWeatherData(weatherResponse.Body())
+			if cityData, found := s.cache.Get(cityName); found && r.Header.Get("Cache-Control") != "no-cache" {
+				switch typeFound := cityData.(type) {
+				case *openweather.WeatherData:
+					log.Debugf("Using cache on city %v", cityName)
+					response = append(response, *cityData.(*openweather.WeatherData))
+					continue
+				default:
+					log.Errorf("Cache error. City data details: %v. Type found: %T", cityData, typeFound)
+					continue
+				}
+			} else {
+				weatherResponse, err := s.weatherClient.SearchByName(cityName)
 				if err != nil {
 					log.Error(err)
 					helpers.RespondWithError(w, http.StatusInternalServerError, err.Error())
 					return
 				}
-				response = append(response, *weatherData)
-			} else {
-				errorData, err := openweather.NewErrorResponse(weatherResponse.Body())
-				if err != nil {
-					helpers.RespondWithError(w, http.StatusInternalServerError, err.Error())
+				if weatherResponse.StatusCode() == http.StatusOK {
+					weatherData, err := openweather.NewWeatherData(weatherResponse.Body())
+					if err != nil {
+						log.Error(err)
+						helpers.RespondWithError(w, http.StatusInternalServerError, err.Error())
+						return
+					}
+					response = append(response, *weatherData)
+					log.Debugf("Adding city %v to cache...", cityName)
+					s.cache.Set(cityName, weatherData, cache.DefaultExpiration)
+				} else {
+					errorData, err := openweather.NewErrorResponse(weatherResponse.Body())
+					if err != nil {
+						helpers.RespondWithError(w, http.StatusInternalServerError, err.Error())
+						return
+					}
+					log.Errorf("OpenWeather API returned error HTTP code: %v. JSON body: %v", weatherResponse.StatusCode(), *errorData)
+					openWeatherErrorMsg := fmt.Sprintf("OpenWeather API error (city %v): %v", cityName, errorData.Message)
+					helpers.RespondWithError(w, http.StatusBadRequest, openWeatherErrorMsg)
 					return
 				}
-				log.Errorf("OpenWeather API returned error HTTP code: %v. JSON body: %v", weatherResponse.StatusCode(), *errorData)
-				openWeatherErrorMsg := fmt.Sprintf("OpenWeather API error: %v", errorData.Message)
-				helpers.RespondWithError(w, http.StatusBadRequest, openWeatherErrorMsg)
-				return
 			}
-
 		}
+
 		helpers.RespondWithJSON(w, http.StatusOK, response)
 		return
 	default:

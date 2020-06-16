@@ -15,13 +15,12 @@ type Config struct {
 // 1. API_PORT (default 8080) - port on which REST API listens for connections
 // 2. OPEN_WEATHER_API_KEY - application ID for OpenWeather REST API
 func Get() *Config {
-	conf := &Config{
-		APIPort: "8080",
-	}
+	conf := &Config{}
 
 	conf.APIPort = os.Getenv("API_PORT")
 	if conf.APIPort == "" {
 		log.Warn("API port configuration environment variable (API_PORT) not set. Setting default value: 8080")
+		conf.APIPort = "8080"
 	}
 	conf.OpenWeatherAPIKey = os.Getenv("OPEN_WEATHER_API_KEY")
 	if conf.OpenWeatherAPIKey == "" {

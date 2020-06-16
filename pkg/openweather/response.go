@@ -66,7 +66,7 @@ type WeatherData struct {
 
 // ErrorData structure holds information about potential issue with OpenWeather API usage.
 type ErrorData struct {
-	Cod string `json:"cod"`
+	Cod int `json:"cod,int,string"` // OpenWeather sometimes responds with int and sometimes with string...
 	Message string `json:"message"`
 }
 

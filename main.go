@@ -18,8 +18,8 @@ func main() {
 	wait = 60
 
 	log.SetFormatter(&log.JSONFormatter{})
+	log.SetLevel(log.DebugLevel)
 	log.SetOutput(os.Stdout)
-
 	restyClient := resty.New()
 	server := endpoints.NewServer(*restyClient)
 	r := mux.NewRouter()

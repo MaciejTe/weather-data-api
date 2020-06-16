@@ -22,6 +22,11 @@
 ##
 #######################################
 -->
+0.2.0 (16.06.2020)
+---------------------
+    - Added cache mechanism
+    - fixed OpenWeather API unmarshalling error
+    
 0.1.1 (16.06.2020)
 ---------------------
     - Added .travis.yml config 
