@@ -12,6 +12,9 @@ build_image:
 build_image_dev:
 	docker build -t weather_app_dev -f Dockerfile.dev .
 
+run:
+	docker run --network host --rm -it --env-file config.env weather_app
+
 dev:
 	docker run --network host --rm -it --env-file config.env -v "${CWD}":/app/ weather_app_dev bash
 
