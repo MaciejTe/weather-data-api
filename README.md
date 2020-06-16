@@ -1,4 +1,8 @@
 # Weather data REST API
+[![Build Status](https://travis-ci.com/MaciejTe/TWFjaWVqIFRvbWN6dWsgcmVjcnVpdG1lbnQgdGFzaw-.svg?branch=master)](https://travis-ci.com/MaciejTe/TWFjaWVqIFRvbWN6dWsgcmVjcnVpdG1lbnQgdGFzaw-) 
+[![Coverage Status](https://codecov.io/gh/MaciejTe/TWFjaWVqIFRvbWN6dWsgcmVjcnVpdG1lbnQgdGFzaw-/branch/master/graph/badge.svg)](https://codecov.io/gh/MaciejTe/TWFjaWVqIFRvbWN6dWsgcmVjcnVpdG1lbnQgdGFzaw-?branch=master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/MaciejTe/TWFjaWVqIFRvbWN6dWsgcmVjcnVpdG1lbnQgdGFzaw-)](https://goreportcard.com/report/github.com/MaciejTe/TWFjaWVqIFRvbWN6dWsgcmVjcnVpdG1lbnQgdGFzaw-)
+[![Documentation](https://godoc.org/github.com/MaciejTe/TWFjaWVqIFRvbWN6dWsgcmVjcnVpdG1lbnQgdGFzaw-?status.svg)](https://godoc.org/github.com/MaciejTe/TWFjaWVqIFRvbWN6dWsgcmVjcnVpdG1lbnQgdGFzaw-)
 
 Small Go microservice enabling users to retrieve information about the weather in the places of their choosing.
 

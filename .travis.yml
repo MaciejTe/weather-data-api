@@ -9,6 +9,7 @@ go:
 before_install:
   - go get -t -v ./...
   - make dep
+  - export OPEN_WEATHER_API_KEY=TEST_KEY
 
 script:
   - go test -race -coverprofile=coverage.txt -covermode=atomic -v ./...
