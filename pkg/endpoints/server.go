@@ -1,10 +1,10 @@
 package endpoints
 
 import (
+	"github.com/MaciejTe/weatherapp/pkg/config"
+	"github.com/MaciejTe/weatherapp/pkg/openweather"
 	"github.com/go-resty/resty/v2"
 	log "github.com/sirupsen/logrus"
-	"weatherapp/pkg/config"
-	"weatherapp/pkg/openweather"
 )
 
 // Server structure holds HTTP client and configuration for all API endpoints.
