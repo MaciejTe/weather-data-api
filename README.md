@@ -1,4 +1,8 @@
 # Weather data REST API
+[![Build Status](https://travis-ci.com/MaciejTe/TWFjaWVqIFRvbWN6dWsgcmVjcnVpdG1lbnQgdGFzaw-.svg?branch=master)](https://travis-ci.com/MaciejTe/TWFjaWVqIFRvbWN6dWsgcmVjcnVpdG1lbnQgdGFzaw-) 
+[![Coverage Status](https://codecov.io/gh/MaciejTe/TWFjaWVqIFRvbWN6dWsgcmVjcnVpdG1lbnQgdGFzaw-/branch/master/graph/badge.svg)](https://codecov.io/gh/MaciejTe/TWFjaWVqIFRvbWN6dWsgcmVjcnVpdG1lbnQgdGFzaw-?branch=master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/MaciejTe/TWFjaWVqIFRvbWN6dWsgcmVjcnVpdG1lbnQgdGFzaw-)](https://goreportcard.com/report/github.com/MaciejTe/TWFjaWVqIFRvbWN6dWsgcmVjcnVpdG1lbnQgdGFzaw-)
+[![Documentation](https://godoc.org/github.com/MaciejTe/TWFjaWVqIFRvbWN6dWsgcmVjcnVpdG1lbnQgdGFzaw-?status.svg)](https://godoc.org/github.com/MaciejTe/TWFjaWVqIFRvbWN6dWsgcmVjcnVpdG1lbnQgdGFzaw-)
 
 Small Go microservice enabling users to retrieve information about the weather in the places of their choosing.
 
@@ -116,8 +120,14 @@ Currently file with following environment variables need to be given as --env-fi
  
 ### How to launch development environment
 1. Enter project directory
-2. Issue ```make build``` 
+2. Issue ```make build_image_dev```
+3. Issue ```make dev```
 
+### How to launch production environment
+1. Enter project directory
+2. Issue ```make build_image```
+3. Prepare config.env file with proper parameters
+4. Issue ```make run```
 
 # TODO
 1. Implement caching

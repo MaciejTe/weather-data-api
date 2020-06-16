@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/MaciejTe/weatherapp/pkg/endpoints"
 	"github.com/go-resty/resty/v2"
 	"github.com/gorilla/mux"
 	log "github.com/sirupsen/logrus"
@@ -10,7 +11,6 @@ import (
 	"os"
 	"os/signal"
 	"time"
-	"weatherapp/pkg/endpoints"
 )
 
 func main() {

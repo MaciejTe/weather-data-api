@@ -22,6 +22,11 @@
 ##
 #######################################
 -->
+0.1.1 (16.06.2020)
+---------------------
+    - Added .travis.yml config 
+    - Improved production Dockerfile
+    
 0.1.0 (15.06.2020)
 ---------------------
     - Implemented first version of REST API

@@ -2,11 +2,11 @@ package endpoints
 
 import (
 	"fmt"
+	"github.com/MaciejTe/weatherapp/pkg/helpers"
+	"github.com/MaciejTe/weatherapp/pkg/openweather"
 	log "github.com/sirupsen/logrus"
 	"net/http"
 	"strings"
-	"weatherapp/pkg/helpers"
-	"weatherapp/pkg/openweather"
 )
 
 // GetWeatherByName collects weather information from OpenWeather API and aggregates them in JSON list.

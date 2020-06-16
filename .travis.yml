@@ -1,0 +1,22 @@
+dist: trusty
+sudo: required
+services:
+  - docker
+language: go
+go:
+  - "1.14.4"
+
+before_install:
+  - go get -t -v ./...
+  - make dep
+  - export OPEN_WEATHER_API_KEY=TEST_KEY
+
+script:
+  - go test -race -coverprofile=coverage.txt -covermode=atomic -v ./...
+  - go mod verify
+  - GOOS=linux go build
+  - go vet ./...                             # go vet is the official Go static analyzer
+  - make lint
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
