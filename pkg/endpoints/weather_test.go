@@ -74,7 +74,7 @@ func TestGetWeatherByNameNegative(t *testing.T) {
 		},
 		{
 			inputURL:         "api/v1/weather?cities=NonexistingCity",
-			expectedPayload:  `{"error":"OpenWeather API error: city not found"}`,
+			expectedPayload:  `{"error":"OpenWeather API error (city NonexistingCity): city not found"}`,
 			expectedHTTPCode: 400,
 		},
 	}
