@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/MaciejTe/weatherapp/pkg/cache"
 	"github.com/MaciejTe/weatherapp/pkg/endpoints"
 	"github.com/go-resty/resty/v2"
 	"github.com/gorilla/mux"
@@ -22,8 +21,7 @@ func main() {
 	log.SetLevel(log.DebugLevel)
 	log.SetOutput(os.Stdout)
 	restyClient := resty.New()
-	cacheClient := cache.NewCache(10*time.Minute, 10*time.Minute)
-	server := endpoints.NewServer(*restyClient, cacheClient)
+	server := endpoints.NewServer(*restyClient)
 	r := mux.NewRouter()
 	api := r.PathPrefix("/api/v1").Subrouter()
 	api.HandleFunc("/weather", server.GetWeatherByName)

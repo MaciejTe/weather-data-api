@@ -1,7 +1,6 @@
 package endpoints
 
 import (
-	"github.com/MaciejTe/weatherapp/pkg/cache"
 	"github.com/go-resty/resty/v2"
 	"github.com/jarcoal/httpmock"
 	log "github.com/sirupsen/logrus"
@@ -12,7 +11,6 @@ import (
 	"path/filepath"
 	"runtime"
 	"testing"
-	"time"
 )
 
 func PkgDir() string {
@@ -28,7 +26,6 @@ func TestGetWeatherByName(t *testing.T) {
 
 	client := resty.New()
 	httpmock.ActivateNonDefault(client.GetClient())
-	cacheClient := cache.NewCache(10*time.Minute, 10*time.Minute)
 	defer httpmock.DeactivateAndReset()
 
 	inputOpenWeatherResponseBody, err := ioutil.ReadFile(filepath.Join(PkgDir(),"testdata", t.Name()+".golden"))
@@ -43,7 +40,7 @@ func TestGetWeatherByName(t *testing.T) {
 		t.Fatal(err)
 	}
 	recorder := httptest.NewRecorder()
-	server := NewServer(*client, cacheClient)
+	server := NewServer(*client)
 	handler := http.HandlerFunc(server.GetWeatherByName)
 
 	handler.ServeHTTP(recorder, req)
@@ -83,13 +80,12 @@ func TestGetWeatherByNameNegative(t *testing.T) {
 	}
 	client := resty.New()
 	httpmock.ActivateNonDefault(client.GetClient())
-	cacheClient := cache.NewCache(10*time.Minute, 10*time.Minute)
 	defer httpmock.DeactivateAndReset()
 
 	httpmock.RegisterResponder("GET", `http://api.openweathermap.org/data/2.5/weather`,
 		httpmock.NewStringResponder(404, `{"cod":"404", "message": "city not found"}`))
 
-	server := NewServer(*client, cacheClient)
+	server := NewServer(*client)
 
 	for _, testCase := range testCaseTable {
 		req, err := http.NewRequest("GET", testCase.inputURL, nil)
