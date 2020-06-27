@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/MaciejTe/weatherapp/pkg/helpers"
 	"github.com/MaciejTe/weatherapp/pkg/openweather"
-	"github.com/patrickmn/go-cache"
 	log "github.com/sirupsen/logrus"
 	"net/http"
 	"strings"
@@ -27,14 +26,14 @@ func (s *Server) GetWeatherByName(w http.ResponseWriter, r *http.Request) {
 
 		var response []openweather.WeatherData
 		for _, cityName := range cities {
-			if cityData, found := s.cache.Get(cityName); found && r.Header.Get("Cache-Control") != "no-cache" {
+			if cityData, found := s.cacheClient.Get(cityName); found && r.Header.Get("cache-Control") != "no-cacheClient" {
 				switch typeFound := cityData.(type) {
 				case *openweather.WeatherData:
-					log.Debugf("Using cache on city %v", cityName)
+					log.Debugf("Using cacheClient on city %v", cityName)
 					response = append(response, *cityData.(*openweather.WeatherData))
 					continue
 				default:
-					log.Errorf("Cache error. City data details: %v. Type found: %T", cityData, typeFound)
+					log.Errorf("cache error. City data details: %v. Type found: %T", cityData, typeFound)
 					continue
 				}
 			} else {
@@ -52,8 +51,8 @@ func (s *Server) GetWeatherByName(w http.ResponseWriter, r *http.Request) {
 						return
 					}
 					response = append(response, *weatherData)
-					log.Debugf("Adding city %v to cache...", cityName)
-					s.cache.Set(cityName, weatherData, cache.DefaultExpiration)
+					log.Debugf("Adding city %v to cacheClient...", cityName)
+					s.cacheClient.Set(cityName, weatherData)
 				} else {
 					errorData, err := openweather.NewErrorResponse(weatherResponse.Body())
 					if err != nil {
