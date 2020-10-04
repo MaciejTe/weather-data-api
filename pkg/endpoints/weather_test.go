@@ -31,7 +31,7 @@ func TestGetWeatherByName(t *testing.T) {
 	cacheClient := cache.NewCache(10*time.Minute, 10*time.Minute)
 	defer httpmock.DeactivateAndReset()
 
-	inputOpenWeatherResponseBody, err := ioutil.ReadFile(filepath.Join(PkgDir(),"testdata", t.Name()+".golden"))
+	inputOpenWeatherResponseBody, err := ioutil.ReadFile(filepath.Join(PkgDir(), "testdata", t.Name()+".golden"))
 	if err != nil {
 		t.Fatalf("failed reading .golden: %s", err)
 	}
@@ -63,13 +63,12 @@ func TestGetWeatherByName(t *testing.T) {
 	log.Infof("Call count info: %v", info)
 }
 
-
 func TestGetWeatherByNameNegative(t *testing.T) {
-	testCaseTable := []struct{
+	testCaseTable := []struct {
 		inputURL         string
 		expectedPayload  string
 		expectedHTTPCode int
-	} {
+	}{
 		{
 			inputURL:         "api/v1/weather",
 			expectedPayload:  "{\"error\":\"You need to provide at least one city\"}",

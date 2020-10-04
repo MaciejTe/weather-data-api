@@ -7,20 +7,20 @@ import (
 )
 
 func TestInMemoryCache(t *testing.T) {
-	testCaseTable := []struct{
-		inputData string
+	testCaseTable := []struct {
+		inputData      string
 		expectedResult interface{}
-		expectedFound bool
-	} {
+		expectedFound  bool
+	}{
 		{
-			inputData: "nonExistingKey",
+			inputData:      "nonExistingKey",
 			expectedResult: nil,
-			expectedFound: false,
+			expectedFound:  false,
 		},
 		{
-			inputData: "testKey",
+			inputData:      "testKey",
 			expectedResult: "testValue",
-			expectedFound: true,
+			expectedFound:  true,
 		},
 	}
 	cacheClient := NewCache(5*time.Second, 5*time.Second)
@@ -38,7 +38,7 @@ func TestInMemoryCacheExpirationTime(t *testing.T) {
 	testValue := "testValue"
 	cacheClient := NewCache(2*time.Second, 2*time.Second)
 	cacheClient.Set(testKey, testValue)
-	time.Sleep(3*time.Second)
+	time.Sleep(3 * time.Second)
 	data, found := cacheClient.Get(testKey)
 	var expectedResult error // error is equal to nil by default
 	expectedFound := false

@@ -8,7 +8,7 @@ import (
 // Coordinates structure holds information about given city coordinates.
 type Coordinates struct {
 	Longitude float32 `json:"lon"`
-	Latitude float32 `json:"lat"`
+	Latitude  float32 `json:"lat"`
 }
 
 // WeatherDescription structure holds information about given city weather description.
@@ -22,17 +22,17 @@ type WeatherDescription struct {
 // MainWeatherData structure holds the most important information about given city.
 type MainWeatherData struct {
 	Temperature float32 `json:"temp"`
-	FeelsLike float32 `json:"feels_like"`
-	TempMin float32 `json:"temp_min"`
-	TempMax float32 `json:"temp_max"`
-	Pressure int `json:"pressure"`
-	Humidity int `json:"humidity"`
+	FeelsLike   float32 `json:"feels_like"`
+	TempMin     float32 `json:"temp_min"`
+	TempMax     float32 `json:"temp_max"`
+	Pressure    int     `json:"pressure"`
+	Humidity    int     `json:"humidity"`
 }
 
 // WindData structure holds information about given city's wind conditions.
 type WindData struct {
-	Speed float32 `json:"speed"`
-	Degrees int `json:"deg"`
+	Speed   float32 `json:"speed"`
+	Degrees int     `json:"deg"`
 }
 
 // OtherData structure holds additional information about given city's weather conditions.
@@ -66,7 +66,7 @@ type WeatherData struct {
 
 // ErrorData structure holds information about potential issue with OpenWeather API usage.
 type ErrorData struct {
-	Cod int `json:"cod,int,string"` // OpenWeather sometimes responds with int and sometimes with string...
+	Cod     int    `json:"cod,int,string"` // OpenWeather sometimes responds with int and sometimes with string...
 	Message string `json:"message"`
 }
 

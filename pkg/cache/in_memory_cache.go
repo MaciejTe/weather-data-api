@@ -12,7 +12,7 @@ type InMemoryCache struct {
 
 // NewCache creates in-memory cache object and returns it.
 func NewCache(defaultExpiration, cleanupInterval time.Duration) Cache {
-	inMemoryCache := InMemoryCache {
+	inMemoryCache := InMemoryCache{
 		cache: cache.New(defaultExpiration, cleanupInterval),
 	}
 	return &inMemoryCache
