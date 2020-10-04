@@ -28,12 +28,12 @@ func main() {
 	api := r.PathPrefix("/api/v1").Subrouter()
 	api.HandleFunc("/weather", server.GetWeatherByName)
 
-	srv := &http.Server {
+	srv := &http.Server{
 		Addr:         fmt.Sprintf("0.0.0.0:%s", server.GetConfig().APIPort),
 		WriteTimeout: time.Second * 15,
 		ReadTimeout:  time.Second * 15,
 		IdleTimeout:  time.Second * 60,
-		Handler: r,
+		Handler:      r,
 	}
 
 	go func() {

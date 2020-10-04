@@ -130,8 +130,10 @@ Currently file with following environment variables need to be given as --env-fi
 4. Issue ```make run```
 
 # TODO
-1. Use goroutines instead of for loop for getting weather data
-2. Rate limiting
-3. More tests (cache test)
-4. Add API performance profiling metrics
-5. Add cache expiration parameters (CACHE_EXPIRATION_TIME, CACHE_PURGE_TIME)
+- [ ] Use goroutines instead of for loop for getting weather data
+- [ ] Rate limiting
+- [x] Separate business logic from cache implementation
+- [ ] Separate business logic from weather provider implementation
+- [x] More tests (cache test)
+- [ ] Add API performance profiling metrics
+- [ ] Add cache expiration parameters (CACHE_EXPIRATION_TIME, CACHE_PURGE_TIME)

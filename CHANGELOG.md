@@ -22,6 +22,11 @@
 ##
 #######################################
 -->
+0.2.1 (04.10.2020)
+---------------------
+    - Added LICENSE file
+    - Whole project styled with gofmt
+    
 0.2.0 (16.06.2020)
 ---------------------
     - Added cache mechanism
